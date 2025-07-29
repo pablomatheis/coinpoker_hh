@@ -1,23 +1,47 @@
 # Poker Hand History Analyzer
 
-Comprehensive poker analysis tool that transforms CoinPoker hand history logs into detailed statistics, visualizations, and Excel reports.
+Comprehensive poker analysis tool that transforms CoinPoker hand history logs into detailed statistics, visualizations, and Excel reports. Now featuring a **web-based interface** for easy real-time analysis and tracking.
 
 ## Features
 
+- **Web-Based Interface**: Modern browser-based UI for real-time analysis
 - **Financial Tracking**: Precise profit/loss calculations with 99%+ accuracy
 - **Multi-Player Analysis**: Analyze any player as the "hero" from the same hand history
 - **Comprehensive Stats**: VPIP, PFR, aggression metrics, positional analysis, and more
 - **Visual Reports**: Balance progression graphs and formatted Excel reports
 - **Edge Case Handling**: All-ins, split pots, uncalled bets, side pots
+- **Standalone Executables**: Run directly from the `dist/` folder without Python installation
 
 ## Quick Start
 
-### 1. Install Dependencies
+### Option 1: Use Pre-built Executables (Recommended)
+
+**No Python installation required!** Simply run the executables from the `dist/` folder:
+
+```bash
+# Launch web-based tracker interface
+./dist/run_web_tracker
+
+# Run command-line analysis
+./dist/run_analysis data/hand_log.txt [player_name]
+```
+
+After launching `run_web_tracker`, open your browser to `http://localhost:5000` to access the web interface.
+
+### Option 2: Run from Source (Alternative)
+
+#### 1. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run Analysis
+#### 2. Launch Web Application
+```bash
+python3 run_web_tracker.py
+```
+Then open `http://localhost:5000` in your browser.
+
+#### 3. Or Run Command-Line Analysis
 ```bash
 # Analyze default player
 python3 run_analysis.py data/hand_log.txt
@@ -27,8 +51,8 @@ python3 run_analysis.py data/hand_log.txt GORILLAZ
 python3 run_analysis.py data/hand_log.txt your_player_name
 ```
 
-### 3. Change Default Player (Optional)
-Edit `config.py`:
+### Configuration (Optional)
+Edit `config.py` to change the default player:
 ```python
 DEFAULT_HERO_NAME = "your_preferred_player"
 ```
@@ -50,10 +74,14 @@ data/
 
 ## Requirements
 
-- Python 3.7+
-- pandas, openpyxl, matplotlib, numpy (see requirements.txt)
+### For Executables
+- No requirements! Just run the executables in `dist/`
 
-## Individual Scripts
+### For Source Code
+- Python 3.7+
+- pandas, openpyxl, matplotlib, numpy, flask (see requirements.txt)
+
+## Individual Scripts (Advanced Users)
 
 ```bash
 # Parse hand history (generates JSON)
@@ -77,4 +105,4 @@ python3 src/create_stats_excel.py data/player_hero_stats.json data/player_player
 
 ---
 
-**Ready to analyze!** Place your hand history file in `data/` and run the analysis. 
+**Ready to analyze!** Use the web interface at `http://localhost:5000` after running `./dist/run_web_tracker` or place your hand history file in `data/` and run the analysis. 

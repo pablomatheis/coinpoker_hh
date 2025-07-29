@@ -4,7 +4,7 @@ Configuration file for poker analysis pipeline
 """
 
 # Default hero name - change this to analyze different players
-DEFAULT_HERO_NAME = "pmatheis"
+DEFAULT_HERO_NAME = "example"
 
 # You can also set this via environment variable
 import os
