@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ### 2. Run Analysis
 ```bash
-# Analyze default player (pmatheis)
+# Analyze default player
 python3 run_analysis.py data/hand_log.txt
 
 # Analyze any other player
