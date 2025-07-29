@@ -8,14 +8,19 @@ Shows the running profit/loss throughout all sessions.
 
 import json
 import sys
+import os
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from datetime import datetime
 from typing import List, Tuple
 import numpy as np
 
+# Add parent directory to path to import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import HERO_NAME
+
 class BalanceGrapher:
-    def __init__(self, hero_name: str = "pmatheis"):
+    def __init__(self, hero_name: str = HERO_NAME):
         self.hero_name = hero_name
         self.hands = []
         self.hero_hands = []
@@ -204,7 +209,7 @@ def main():
         sys.exit(1)
     
     filename = sys.argv[1]
-    hero_name = sys.argv[2] if len(sys.argv) > 2 else "pmatheis"
+    hero_name = sys.argv[2] if len(sys.argv) > 2 else HERO_NAME
     
     print(f"Creating balance graph for {hero_name}")
     

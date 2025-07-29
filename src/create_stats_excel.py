@@ -15,8 +15,12 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 from openpyxl.formatting.rule import CellIsRule
 import os
 
+# Add parent directory to path to import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import HERO_NAME
+
 class StatsExcelGenerator:
-    def __init__(self, hero_name: str = "pmatheis"):
+    def __init__(self, hero_name: str = HERO_NAME):
         self.hero_name = hero_name
         self.hero_stats = {}
         self.players_stats = {}
@@ -300,7 +304,7 @@ def main():
     
     hero_stats_file = sys.argv[1]
     players_stats_file = sys.argv[2]
-    hero_name = sys.argv[3] if len(sys.argv) > 3 else "pmatheis"
+    hero_name = sys.argv[3] if len(sys.argv) > 3 else HERO_NAME
     
     print(f"Creating Excel stats file for {hero_name}")
     

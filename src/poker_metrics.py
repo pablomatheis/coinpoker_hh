@@ -8,13 +8,18 @@ Includes financial metrics, VPIP, PFR, aggression, positional stats, and more.
 
 import json
 import sys
+import os
 from typing import Dict, List, Tuple, Optional
 from decimal import Decimal
 from collections import defaultdict, Counter
 import statistics
 
+# Add parent directory to path to import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import HERO_NAME
+
 class PokerMetrics:
-    def __init__(self, hero_name: str = "pmatheis"):
+    def __init__(self, hero_name: str = HERO_NAME):
         self.hero_name = hero_name
         self.hands = []
         self.hero_hands = []  # Hands where hero participated
@@ -999,7 +1004,7 @@ def main():
         sys.exit(1)
     
     filename = sys.argv[1]
-    hero_name = "pmatheis"
+    hero_name = HERO_NAME
     output_json = False
     
     # Parse arguments

@@ -1,0 +1,22 @@
+# Poker Hand History Analysis Requirements
+# Python 3.7+ required for dataclasses support
+# Core analysis and visualization dependencies
+
+# Data manipulation and analysis
+pandas>=1.3.0
+
+# Excel file creation and formatting  
+openpyxl>=3.0.9
+
+# Plotting and visualization
+matplotlib>=3.5.0
+numpy>=1.21.0
+
+# All other dependencies are from Python standard library:
+# - json, sys, os, re (built-in)
+# - typing, dataclasses (Python 3.7+)
+# - decimal, collections, statistics (built-in)
+# - subprocess, datetime (built-in)
+
+# Installation:
+# pip install -r requirements.txt 
