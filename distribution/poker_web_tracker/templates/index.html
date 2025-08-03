@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Table Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Dynamic Poker Table Tracker</h1>
+            <div class="controls">
+                <button id="addPlayerBtn" class="btn btn-primary">Add Player</button>
+                <button id="loadDefaultBtn" class="btn btn-secondary">Load Default</button>
+                <button id="clearAllBtn" class="btn btn-warning">Clear All</button>
+                <button id="alwaysOnTopBtn" class="btn btn-info">Always On Top</button>
+            </div>
+        </header>
+
+        <!-- File Upload Section -->
+        <section class="upload-section">
+            <div class="upload-group">
+                <label for="playersFile" class="upload-label">
+                    <span>Load Players Stats</span>
+                    <input type="file" id="playersFile" accept=".json" style="display: none;">
+                </label>
+                <label for="heroFile" class="upload-label">
+                    <span>Load Hero Stats</span>
+                    <input type="file" id="heroFile" accept=".json" style="display: none;">
+                </label>
+            </div>
+        </section>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="statusText">Ready - Load your player stats to begin</span>
+        </div>
+
+        <!-- Players Grid -->
+        <main class="players-container">
+            <div id="playersGrid" class="players-grid">
+                <!-- Player panels will be dynamically added here -->
+            </div>
+        </main>
+
+        <!-- Hero Stats Summary -->
+        <section class="hero-summary">
+            <h3>Your Stats Summary</h3>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="label">Hands:</span>
+                    <span id="heroHands" class="value">--</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="label">Net:</span>
+                    <span id="heroNet" class="value">--</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="label">ROI:</span>
+                    <span id="heroROI" class="value">--</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="label">VPIP:</span>
+                    <span id="heroVPIP" class="value">--</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="label">PFR:</span>
+                    <span id="heroPFR" class="value">--</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="label">3-Bet:</span>
+                    <span id="heroThreeBet" class="value">--</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="label">Agg Factor:</span>
+                    <span id="heroAggFactor" class="value">--</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Player Panel Template -->
+    <template id="playerPanelTemplate">
+        <div class="player-panel">
+            <div class="player-header">
+                <h4 class="player-title">Player 1</h4>
+                <div class="player-controls">
+                    <button class="clear-btn btn btn-sm">Clear</button>
+                    <button class="remove-btn btn btn-sm btn-danger" style="display: none;">Remove</button>
+                </div>
+            </div>
+            
+            <div class="player-selector">
+                <input type="text" class="player-input" placeholder="Start typing player name..." autocomplete="off">
+                <div class="player-dropdown" style="display: none;">
+                    <!-- Dropdown options will be populated here -->
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-row">
+                    <span class="stat-label">Hands:</span>
+                    <span class="stat-value" data-stat="hands_against_hero">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">VPIP:</span>
+                    <span class="stat-value" data-stat="vpip_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">PFR:</span>
+                    <span class="stat-value" data-stat="pfr_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">3-Bet:</span>
+                    <span class="stat-value" data-stat="three_bet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Agg Factor:</span>
+                    <span class="stat-value" data-stat="aggression_factor">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Showdown:</span>
+                    <span class="stat-value" data-stat="went_to_showdown_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">SD Win:</span>
+                    <span class="stat-value" data-stat="won_at_showdown_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">C-Bet:</span>
+                    <span class="stat-value" data-stat="cbet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Fold vs Flop:</span>
+                    <span class="stat-value" data-stat="fold_vs_flop_bet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">AFq:</span>
+                    <span class="stat-value" data-stat="afq_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Turn CBet:</span>
+                    <span class="stat-value" data-stat="turn_cbet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Fold vs Turn:</span>
+                    <span class="stat-value" data-stat="fold_vs_turn_bet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">River Bet:</span>
+                    <span class="stat-value" data-stat="river_cbet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Fold vs River:</span>
+                    <span class="stat-value" data-stat="fold_vs_river_bet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Donk Bet:</span>
+                    <span class="stat-value" data-stat="donk_bet_percentage">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">vs Hero:</span>
+                    <span class="stat-value" data-stat="hero_net_vs_player">--</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html> 
