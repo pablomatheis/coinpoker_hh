@@ -7,25 +7,25 @@ This package contains standalone executables for poker hand analysis and web-bas
 ### 🌐 Web Tracker (`poker_web_tracker/`)
 - **Executable**: `poker_web_tracker`
 - **Purpose**: Web-based interface for viewing poker statistics
-- **Required Files**: `templates/`, `static/`, `data/` folders (included)
+- **Required Files**: `templates/`, `static/` folders (included)
 
 ### 📊 Analysis Pipeline (`poker_analysis/`)
 - **Executable**: `poker_analysis`
 - **Purpose**: Command-line tool for analyzing poker hand logs
-- **Sample Data**: `sample_data/hand_log.txt` (example input file)
+- **Required files**: `sample_data/hand_log.txt` (example input file)
 
 ## 🚀 Quick Start
 
 ### Web Tracker
 1. Navigate to the `poker_web_tracker/` folder
-2. Run: `./poker_web_tracker`
-3. Open browser to: `http://localhost:8080`
-4. Upload JSON stats files to view player data
+2. Run: `./start_web_tracker.sh`
+3. Open browser to: `http://localhost:8080` (it takes around 15 seconds to fully start)
+4. Upload JSON stats files to view villain data and hero data
 
 ### Analysis Pipeline
 1. Navigate to the `poker_analysis/` folder
-2. Run: `./poker_analysis <hand_log_file> [hero_name]`
-3. Example: `./poker_analysis sample_data/hand_log.txt john_doe`
+2. Run: `./poker_analysis <hand_log_file> [hero_name]` or run `./analyze_sample.sh` but make sure to edit the file to use your hero name and save it.
+3. Example: `./poker_analysis sample_data/hand_log.txt john_doe` or `./analyze_sample.sh`if you edited the file to use your username.
 
 ## 📋 System Requirements
 
@@ -69,16 +69,9 @@ When you run the analysis pipeline, it creates:
 3. **Web Access**: The web tracker is accessible from other devices on your network
 4. **Data Backup**: Copy generated JSON files to preserve analysis results
 
-## 📞 Support
-
-For issues or questions:
-1. Check the troubleshooting section above
-2. Verify all required files are present
-3. Ensure executables have proper permissions
 
 ## 🔄 Version Info
 
-- **Built**: $(date)
 - **Python**: 3.12.3
 - **PyInstaller**: 6.14.2
 - **Platform**: macOS arm64
