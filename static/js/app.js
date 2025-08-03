@@ -27,6 +27,7 @@ class PokerTableTracker {
     setupEventListeners() {
         // Control buttons
         document.getElementById('addPlayerBtn').addEventListener('click', () => this.addPlayer());
+        
         document.getElementById('loadDefaultBtn').addEventListener('click', () => this.loadDefaultData());
         document.getElementById('clearAllBtn').addEventListener('click', () => this.clearAllPlayers());
         document.getElementById('alwaysOnTopBtn').addEventListener('click', () => this.toggleAlwaysOnTop());
@@ -49,6 +50,11 @@ class PokerTableTracker {
         const panel = this.createPlayerPanel(seatNumber);
         
         this.playerPanels.set(seatNumber, panel);
+        
+        // Populate dropdown if we have players (now that panel is in the map)
+        if (this.players.length > 0) {
+            this.updatePlayerDropdown(seatNumber, '');
+        }
         
         // Add to grid with animation
         const playersGrid = document.getElementById('playersGrid');
@@ -81,11 +87,6 @@ class PokerTableTracker {
         if (seatNumber > 1) {
             removeBtn.style.display = 'block';
             removeBtn.addEventListener('click', () => this.removePlayer(seatNumber));
-        }
-        
-        // Populate dropdown if we have players
-        if (this.players.length > 0) {
-            this.updatePlayerDropdown(seatNumber, '');
         }
         
         return panel;
